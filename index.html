@@ -4,23 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo list</title>
-    <script src="index.js"></script>
+    <script src="index.js" async></script>
     <link rel="stylesheet" href="main.css" />
   </head>
 
   <body>
     <div class="all-tasks">
       <h2 class="task-list-title">My lists</h2>
-      <ul class="task-list">
-        <li class="list-name active-list">Youtube</li>
-        <li class="list-name">Work</li>
-        <li class="list-name">Grocery</li>
+      <ul class="task-list" data-lists>
       </ul>
 
-      <form action="">
+      <form action="" data-new-list-form>
         <input 
           type="text"
           class="new list"
+          data-new-list-input
           placeholder="new list name"
           aria-label="new list name"
         />
