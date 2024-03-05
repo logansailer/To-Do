@@ -43,11 +43,7 @@ newListForm.addEventListener('submit', e => {
 
 //creates a list
 function createList(name) {
-    return { id: Date.now().toString(), name: name, tasks: [{
-        id: "dflkj",
-        name:  'test',
-        complete:  false,
-    }] }
+    return { id: Date.now().toString(), name: name, tasks: [] }
 };
 
 function saveAndRender() {
@@ -93,6 +89,12 @@ function renderTasks(selectedList) {
     });
 };
 
+function renderTaskCount(selectedList) {
+    const incompleteTaskCount = selectedList.tasks.filter(task => !task.complete).length;
+    const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
+    listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`;
+}
+
 function renderLists() {
     lists.forEach(list => {
         const listElement = document.createElement('li');
@@ -105,12 +107,6 @@ function renderLists() {
         listsContainer.appendChild(listElement);
     });
 };
-
-function renderTaskCount() {
-    const incompleteTaskCount = selectedList.tasks.filter(task => !task.complete).length;
-    const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
-    listCountElement.innerText = `${incompleteTaskCount} ${taskString} remaining`;
-}
 
 //clears list element from DOM
 function clearElement(element) {
