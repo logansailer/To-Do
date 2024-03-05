@@ -3,6 +3,10 @@ const listsContainer = document.querySelector('[data-lists]');
 const newListForm = document.querySelector('[data-new-list-form]');
 const newListInput = document.querySelector('[data-new-list-input]');
 const deleteListButton = document.querySelector('[data-delete-list-button]')
+const listDisplayContainer = document.querySelector('[data-list-display-container]');
+const listTitleElement = document.querySelector('[data-list-title]');
+const listCountElement = document.querySelector('[data-list-count]');
+const tasksContainer = document.querySelector('[data-tasks]');
 
 //saves elements upon page refresh into JSON, otherwise from empty array
 const LOCAL_STORAGE_LIST_KEY = 'task.lists';
@@ -54,6 +58,19 @@ function saveAndRender() {
 //renders new list to DOM
 function render() {
     clearElement(listsContainer)
+    renderLists();
+    const selectedList = lists.find(list => list.id === selectedListId)
+
+    //renders nothing if no list selected, or to-do if list is selected
+    if (selectedListId == null) {
+        listDisplayContainer.style.display = 'none';
+    } else {
+        listDisplayContainer.style.display = '';
+        listTitleElement.innerText = selectedList.name
+    }
+};
+
+function renderLists() {
     lists.forEach(list => {
         const listElement = document.createElement('li');
         listElement.dataset.listId = list.id;
@@ -64,7 +81,7 @@ function render() {
         }
         listsContainer.appendChild(listElement);
     })
-};
+}
 
 //clears list element from DOM
 function clearElement(element) {
