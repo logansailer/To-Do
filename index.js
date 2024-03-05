@@ -41,18 +41,13 @@ newListForm.addEventListener('submit', e => {
     saveAndRender();
 });
 
-//creates a list list
+//creates a list
 function createList(name) {
     return { id: Date.now().toString(), name: name, tasks: [{
         id: "dflkj",
         name:  'test',
         complete:  false,
     }] }
-}
-;
-//saves list element to local storage
-function save() {
-    localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify(lists));
 };
 
 function saveAndRender() {
@@ -60,13 +55,19 @@ function saveAndRender() {
     render();
 };
 
+//saves list element to local storage
+function save() {
+    localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify(lists));
+    localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListId)
+};
+
 //renders new list to DOM
 function render() {
     clearElement(listsContainer)
     renderLists();
-    const selectedList = lists.find(list => list.id === selectedListId)
 
     //renders nothing if no list selected, or to-do if list is selected
+    const selectedList = lists.find(list => list.id === selectedListId)
     if (selectedListId == null) {
         listDisplayContainer.style.display = 'none';
     } else {
