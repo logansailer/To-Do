@@ -5,7 +5,7 @@ const newListInput = document.querySelector('[data-new-list-input]');
 
 //saves elements upon page refresh into JSON, otherwise from empty array
 const LOCAL_STORAGE_LIST_KEY = 'task.lists';
-let lists = JSON.parse(localStorage.setItem(LOCAL_STORAGE_LIST_KEY)) || [];
+let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [];
 
 //
 newListForm.addEventListener('submit', e => {
